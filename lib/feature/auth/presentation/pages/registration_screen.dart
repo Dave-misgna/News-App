@@ -114,7 +114,7 @@ class _RegistrationScreenState extends ConsumerState<RegistrationScreen> {
                       : Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 18.0),
                         child: ElevatedButton(
-                            onPressed: () async {
+                            onPressed: () {
                               if (passwordController.text !=
                                   confirmPasswordController.text) {
                                 ScaffoldMessenger.of(context).showSnackBar(
@@ -128,25 +128,15 @@ class _RegistrationScreenState extends ConsumerState<RegistrationScreen> {
                         
                               // Clear any previous state before starting new registration
                               ref.read(authControllerProvider.notifier).clearState();
-                        
-                              try {
-                                await ref
-                                    .read(authControllerProvider.notifier)
-                                    .registerUser(
-                                      userNameController.text,
-                                      emailController.text,
+
+                              ref
+                                  .read(authControllerProvider.notifier)
+                                  .registerUser(
+                                    userNameController.text,
+                                    emailController.text,
                                       passwordController.text,
                                     );
-                              } catch (e) {
-                                if (context.mounted) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text('Registration failed: $e'),
-                                      backgroundColor: Colors.red,
-                                    ),
-                                  );
-                                }
-                              }
+                               
                             },
                             style: ElevatedButton.styleFrom(
                               elevation: 4,

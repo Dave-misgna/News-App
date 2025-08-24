@@ -31,11 +31,6 @@ class NewsController extends StateNotifier<MainPageModel> {
     try {
       List<NewsModel> newsList = [];
 
-    //   if (query.trim().isEmpty) {
-    //   await fetchNews();
-    //   return;
-    // }
-
     if (!isPagination) {
       // Fresh search: reset state
       state = state.copyWith(

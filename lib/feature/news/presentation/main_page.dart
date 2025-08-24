@@ -15,12 +15,13 @@ class MainPage extends ConsumerStatefulWidget {
 }
 
 class _MainPageState extends ConsumerState<MainPage> {
-  final ScrollController scrollController = ScrollController();
+  late ScrollController scrollController;
   final TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    scrollController = ScrollController();
     scrollController.addListener(() {
       final position = scrollController.position;
       if (position.pixels >= position.maxScrollExtent - 300) {

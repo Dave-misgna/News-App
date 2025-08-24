@@ -39,7 +39,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       } else if (next.user != null && context.mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text("Login Successfully")));
+        ).showSnackBar(SnackBar(content: Text("Login Successfully"), backgroundColor: Colors.green));
         context.go('/home'); // Navigate when user is logged in
       }
     });
@@ -87,25 +87,15 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               : Padding(
                   padding: EdgeInsetsGeometry.symmetric(horizontal: 20),
                   child: ElevatedButton(
-                    onPressed: () async {
+                    onPressed: (){
                       ref.read(authControllerProvider.notifier).clearState();
-                      try {
-                        await ref
-                            .read(authControllerProvider.notifier)
+
+                      ref.read(authControllerProvider.notifier)
                             .siginInUser(
                               emailController.text,
                               passwordController.text,
                             );
-                      } catch (e) {
-                        if (context.mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Login Failed ${e.toString()}'),
-                              backgroundColor: Colors.red,
-                            ),
-                          );
-                        }
-                      }
+                       
                     },
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(double.infinity, 50),
